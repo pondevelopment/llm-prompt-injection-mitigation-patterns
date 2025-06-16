@@ -2,6 +2,8 @@
 
 This is a single-page, front-end only web application designed to explain and demonstrate key security design patterns for Large Language Model (LLM) agents, specifically for mitigating prompt injection attacks. The content and concepts are based on the academic paper: [**"Design Patterns for Securing LLM Agents against Prompt Injections" (arXiv:2506.08837v2)**](https://arxiv.org/pdf/2506.08837).
 
+Try it [**here**](https://pondevelopment.github.io/llm-prompt-injection-mitigation-patterns/)
+
 The application is built for an audience of software architects, lead developers, and security professionals to provide a clear, interactive, and hands-on understanding of these critical security concepts.
 
 ## **Features**
