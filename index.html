@@ -208,11 +208,27 @@
                                 }
                             });
                             window.selectedAction = selectedAction;
+                            
+                            const fullPromptToLLM = `You are a helpful but strictly limited assistant. Your only task is to identify which of the following actions best matches the user's request. You must respond with ONLY the name of the action, and nothing else.
+
+Available Actions:
+- "Get Order Status"
+- "Request Return"
+- "Get Product Info"
+- "Unknown Action"
+
+User's Request:
+"${text}"
+
+Selected Action:`;
 
                             outputContainer.innerHTML += `
                                 <div class="step-explanation bg-purple-50 border-purple-400">
                                     <h5 class="font-bold text-purple-800">Step 2: LLM Selects an Action</h5>
-                                    <p class="text-sm text-purple-700">The agent's only job is to return the *name* of a predefined action. It is not allowed to generate code or commands. It sees the injection but ignores it as it doesn't match any known action's keywords.</p>
+                                    <p class="text-sm text-purple-700">The system constructs a detailed prompt for the LLM, instructing it to act as a classifier. The user's message is embedded as data to be analyzed.</p>
+                                    <p class="font-semibold text-sm mt-2">Full prompt sent to LLM:</p>
+                                    <div class="code-block text-xs mt-1">${fullPromptToLLM}</div>
+                                    <p class="text-sm mt-2 text-purple-700">The LLM, following these instructions, analyzes the user request and outputs only the name of the best-matching action.</p>
                                     <p class="text-sm mt-2"><strong>LLM Output (a simple string):</strong> <code class="font-mono bg-purple-200 p-1 rounded">"${selectedAction.name}"</code></p>
                                 </div>`;
                             button.textContent = 'Next Step: System Maps Selection to Tool';
@@ -675,7 +691,7 @@ email.send(
                 button.dataset.patternId = pattern.id;
                 button.addEventListener('click', () => displayPattern(pattern));
                 tabsContainer.appendChild(button);
-            });
+       });
 
             // Display the first pattern by default
             if (patterns.length > 0) {
